@@ -6,6 +6,7 @@ require_once __DIR__ . '/../models/QueryModel.php';
  * Control search operation.
  */
 class searchItemsController {
+  
   private $db;
 
   /**

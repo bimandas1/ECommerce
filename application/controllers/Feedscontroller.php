@@ -6,6 +6,7 @@ require_once __DIR__ . '/../models/QueryModel.php';
  * Controle main shop page.
  */
 class FeedsController {
+  
   private $db;
   private $userData;
 

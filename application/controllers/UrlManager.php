@@ -17,6 +17,7 @@ require_once __DIR__ . '/ErrorController.php';
  * Manage paths and require pages.
  */
 class UrlManager {
+
   /**
    * Require pages accourding to the path.
    *

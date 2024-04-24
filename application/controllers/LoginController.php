@@ -4,6 +4,7 @@
  * Control user login.
  */
 class LoginController {
+
   private $message = null;
   private $googleAuth = null;
 
@@ -23,7 +24,6 @@ class LoginController {
         session_start();
         $_SESSION['email'] = $email;
         header('location: /feeds');
-
       }
       else {
         $message = 'Email id or password not matched';

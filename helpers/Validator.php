@@ -4,6 +4,7 @@
  * Validate user's inputs.
  */
 class Validator {
+
   /**
    * Validate user's name.
    *

@@ -6,6 +6,7 @@ require_once __DIR__ . '/../models/QueryModel.php';
  * Control cart view.
  */
 class CartController {
+  
   private $db;
 
   /**
@@ -29,7 +30,6 @@ class CartController {
       foreach($cartDetails as $item) {
         $totalAmount += $item['price'] * $item['quantity'];
       }
-
       // Require view.
       require_once __DIR__ . '/../views/cart_view.php';
     }

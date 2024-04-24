@@ -7,6 +7,7 @@ use Fpdf\Fpdf;
  * Generate PDF.
  */
 class GeneratePdf {
+  
   /**
    * Generate PDF for bill invoice.
    *

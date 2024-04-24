@@ -8,10 +8,10 @@ require_once __DIR__ . '/../../helpers/Mail.php';
  * Control password reset.
  */
 class ResetPasswordController {
+
   private $db;
   private $validator;
   private $mail;
-
 
   /**
    * Constructor function to create objects.

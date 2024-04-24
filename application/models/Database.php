@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../core/Dotenv.php';
  * Connect with database.
  */
 class Database {
+
   public $conn;
 
   /**
@@ -14,7 +15,6 @@ class Database {
   function __construct () {
     // Load environment variables.
     $dotEnv = new Dotenv();
-
     $dbname = "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}";
     $username = $_ENV['DB_USER_NAME'];
     $password = $_ENV['DB_PASSWORD'];

@@ -4,9 +4,10 @@ require_once __DIR__ . '/../models/QueryModel.php';
 require_once __DIR__ . '/../../helpers/Mail.php';
 
 /**
- * cnotroller to manage buy products.
+ * Conotroller to manage buy products.
  */
 class BuyController {
+  
   private $db;
   private $mail;
 

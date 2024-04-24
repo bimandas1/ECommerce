@@ -6,6 +6,7 @@ require_once __DIR__ . '/../models/QueryModel.php';
  * Controls add/remove operations on cart.
  */
 class EditCartController {
+
   private $db;
 
   /**
@@ -60,7 +61,8 @@ class EditCartController {
       'updated_quantity' => $updated_quantity,
       'total_amount' => $total_amount
     );
-
+    
+    // Respond.
     echo json_encode($respond);
   }
 }

@@ -6,6 +6,7 @@ require_once __DIR__ . '/Database.php';
  * Perform queries on post table.
  */
 class QueryModel extends Database {
+
   /**
    * Constructor function to use the connection with database.
    */
@@ -46,8 +47,7 @@ class QueryModel extends Database {
    * @return bool.
    *   True if changing is successfull.
    */
-  public function changePassword(string $email, string $new_password): bool
-  {
+  public function changePassword(string $email, string $new_password): bool {
     try {
       $sql = $this->conn->prepare("update user set password = ? where email = ?");
       // Generate hash value of the new password.
@@ -74,8 +74,7 @@ class QueryModel extends Database {
    * @return boolean.
    *   True if user email and password match.
    */
-  public function isValidUser(string $email, string $password): bool
-  {
+  public function isValidUser(string $email, string $password): bool {
     try {
       $sql = $this->conn->prepare("select password from user where email = ?");
       $sql->execute([$email]);
@@ -113,8 +112,7 @@ class QueryModel extends Database {
    * @return bool.
    *   True if addition is successfull.
    */
-  public function addUser(string $email, string $password, string $fname, string $lname): bool
-  {
+  public function addUser(string $email, string $password, string $fname, string $lname): bool {
     try {
       $sql = $this->conn->prepare("insert into user (email, password, fname, lname) values (?, ?, ?, ?)");
       // Generate hash value of the password.
@@ -141,14 +139,14 @@ class QueryModel extends Database {
    * @return array.
    *   User's data.
    */
-  public function getUserData(string $email): array
-  {
+  public function getUserData(string $email): array|null {
     try {
       $sql = $this->conn->prepare("Select fname, lname, is_admin from user user where email = ?");
       $sql->execute([$email]);
       $res = $sql->fetch(PDO::FETCH_ASSOC);
       return $res;
-    } catch (Exception) {
+    }
+    catch (Exception) {
       return null;
     }
   }
@@ -162,8 +160,7 @@ class QueryModel extends Database {
    * @return string.
    *   User's password.
    */
-  public function getUserPassword(string $email): string
-  {
+  public function getUserPassword(string $email): string|null {
     try {
       $sql = $this->conn->prepare("Select password from user user where email = ?");
       $sql->execute([$email]);
@@ -188,8 +185,7 @@ class QueryModel extends Database {
    * @return bool.
    *   True if updation is successfull.
    */
-  public function updateUserData(string $email, string $fname, string $lname): bool
-  {
+  public function updateUserData(string $email, string $fname, string $lname): bool {
     try {
       $sql = $this->conn->prepare("update user set fname = ?, lname = ? where email = ?");
       $sql->execute([$fname, $lname, $email]);
@@ -214,8 +210,7 @@ class QueryModel extends Database {
    * @return bool.
    *   True if updation is successfull.
    */
-  public function updateUserPassword(string $email, string $new_password): bool
-  {
+  public function updateUserPassword(string $email, string $new_password): bool {
     try {
       $sql = $this->conn->prepare("update user set password = ? where email = ?");
       $sql->execute([$new_password, $email]);
@@ -240,7 +235,7 @@ class QueryModel extends Database {
    * @return mixed.
    *   Returns posts array or null in case no post available.
    */
-  public function fetchPoroductsByLimit(int $lastId, int $count) : mixed {
+  public function fetchPoroductsByLimit(int $lastId, int $count) : array|null {
     try {
       $sql = $this->conn->prepare("select * from product where id > $lastId order by id asc limit $count");
       $sql->execute();
@@ -261,7 +256,7 @@ class QueryModel extends Database {
    * @return mixed.
    *   Returns posts array or null in case no post match with search keyword.
    */
-  public function fetchProductsBySearchKeys(string $searchKeys) : mixed {
+  public function fetchProductsBySearchKeys(string $searchKeys) : array {
     $sql = $this->conn->prepare("select * from product where name like '%$searchKeys%' OR description like '%$searchKeys%' order by id asc");
     $sql->execute();
     $res = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -302,7 +297,7 @@ class QueryModel extends Database {
    * @return mixed.
    *   Returns posts array or null in case no post is uploaded by the user.
    */
-  public function getUserPosts($email) : mixed {
+  public function getUserPosts($email) : array {
     $sql = $this->conn->prepare("select * from post where email = ?");
     $sql->execute([$email]);
     $res = $sql->fetchAll(PDO::FETCH_ASSOC);

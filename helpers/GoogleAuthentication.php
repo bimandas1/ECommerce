@@ -7,6 +7,7 @@ require_once __DIR__ . '/../core/Dotenv.php';
  * Authenticate and verify using Google OAuth.
  */
 class GoogleAuthentication {
+  
   private $googleClient;
 
   /**

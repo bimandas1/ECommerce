@@ -6,6 +6,7 @@ require_once __DIR__ . '/../models/QueryModel.php';
  * Control new user registeration.
  */
 class RegisterController {
+
   private $db;
 
   /**
@@ -47,8 +48,12 @@ class RegisterController {
     $validator = new Validator();
 
     // User input data not valid.
-    if(($validator->emailValidate($_POST['email']) && $validator->nameValidate($_POST['fname']) && $validator->nameValidate($_POST['lname']) && $validator->passwordValidate($_POST['password'])) == FALSE) {
-      echo "User input data isn't valid";
+    if((
+      $validator->emailValidate($_POST['email']) &&
+      $validator->nameValidate($_POST['fname']) &&
+      $validator->nameValidate($_POST['lname']) &&
+      $validator->passwordValidate($_POST['password'])) == FALSE) {
+        echo "User input data isn't valid";
     }
     // User already registered.
     else if($this->db->isExistingUser($_SESSION['email'])) {

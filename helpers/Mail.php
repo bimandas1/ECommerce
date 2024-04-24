@@ -11,6 +11,7 @@ use PHPMailer\PHPMailer\Exception;
  * Class to send mail.
  */
 class Mail {
+  
   public $mail;
 
   /**
