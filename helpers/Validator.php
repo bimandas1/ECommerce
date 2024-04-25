@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../core/Dotenv.php';
+
 /**
  * Validate user's inputs.
  */
@@ -28,7 +31,24 @@ class Validator {
    *   TRUE if email is valid, else FALSE.
    */
   public function emailValidate(string $email): bool {
-    return filter_var($email, FILTER_VALIDATE_EMAIL);
+    $dotenv = new Dotenv();
+    $api_key = $_ENV['EMAIL_VALIDATE_API_KEY'];
+    $api_url = "https://emailvalidation.abstractapi.com/v1/?api_key={$api_key}&email={$email}&auto_correct=false";
+
+    // Check mail validation through Abstract Api.
+    try {
+      $client = new \GuzzleHttp\Client();
+      $response = $client->request('GET', $api_url);
+      $res = json_decode($response->getBody(), TRUE);
+
+      if($res['deliverability'] === 'DELIVERABLE') {
+        return TRUE;
+      }
+      return FALSE;
+    }
+    catch(Exception) {
+      return FALSE;
+    }
   }
 
   /**
@@ -41,6 +61,6 @@ class Validator {
    *   TRUE if password is valid, else FALSE.
    */
   public function passwordValidate(string $password): bool {
-    return preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/", $password);
+    return preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/", $password);
   }
 }

@@ -12,9 +12,9 @@
 <body>
   <div class="main">
     <!-- Alert message -->
-    <?php if ($message !== null) : ?>
+    <?php if ($this->message !== null) : ?>
       <div class="alert">
-        <p class="alert-message"> <?= $message ?> </p>
+        <p class="alert-message"> <?= $this->message ?> </p>
       </div>
     <?php endif; ?>
 
@@ -31,7 +31,8 @@
 
       <form id="form-email-input">
         <input type="hidden" name="task" value="submit-email">
-        <input type="text" name="email" placeholder="Email Id">
+        <label for="email"> Email </label>
+        <input type="email" name="email" placeholder="Email Id" required>
         <input type="submit" name="submit">
       </form>
     </div>
@@ -44,7 +45,8 @@
 
       <form id="form-otp-input">
         <input type="hidden" name="task" value="submit-otp">
-        <input type="text" name="otp" placeholder="OTP">
+        <label for="otp"> OTP </label>
+        <input type="text" name="otp" placeholder="OTP" required>
         <input type="submit" name="submit">
       </form>
     </div>
@@ -57,8 +59,10 @@
 
       <form id="form-new-password-input">
         <input type="hidden" name="task" value="submit-new-password">
-        <input type="text" name="new-password" placeholder="New Password">
-        <input type="text" name="reenter-new-password" placeholder="Reenter New Password">
+        <label for="new-password"> New Password </label>
+        <input type="password" name="new-password" placeholder="New Password" required>
+        <label for="reenter-new-password"> Reneter new password </label>
+        <input type="password" name="reenter-new-password" placeholder="Reenter New Password" required>
         <input type="submit" name="submit">
       </form>
     </div>
@@ -77,6 +81,7 @@
 
   </div>
 </body>
-  <script src="/public/script/script.js"></script>
-  <script src="/public/script/reset_password_script.js"></script>
+<script src="/public/script/script.js"></script>
+<script src="/public/script/reset_password_script.js"></script>
+
 </html>

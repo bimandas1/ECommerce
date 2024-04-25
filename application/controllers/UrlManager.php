@@ -11,6 +11,8 @@ require_once __DIR__ . '/SearchItemsController.php';
 require_once __DIR__ . '/EditCartController.php';
 require_once __DIR__ . '/CartController.php';
 require_once __DIR__ . '/BuyController.php';
+require_once __DIR__ . '/AdminController.php';
+require_once __DIR__ . '/AddNewProductController.php';
 require_once __DIR__ . '/ErrorController.php';
 
 /**
@@ -65,6 +67,16 @@ class UrlManager {
       case 'buy':
         $buyController = new BuyController();
         $buyController->invoke();
+        break;
+
+      case 'admin':
+        $adminController = new AdminController();
+        $adminController->invoke();
+        break;
+
+      case 'add-new-product':
+        $addNewProductController = new AddNewProductController();
+        $addNewProductController->invoke();
         break;
 
       default:

@@ -20,7 +20,7 @@
 
 <body>
   <!-- Require Navbar -->
-  <?php require_once __DIR__ . '/components/navbar.php'; ?>
+  <?php require_once __DIR__ . '/components/navbar_view.php'; ?>
 
   <!-- Show cart details -->
   <table class="table table-striped">

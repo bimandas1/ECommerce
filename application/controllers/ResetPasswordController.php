@@ -93,7 +93,7 @@ class ResetPasswordController {
   }
 
   /**
-   * Checnge password.
+   * Change password.
    */
   public function changePassword() {
     $new_password = $_POST['new-password'];
@@ -115,7 +115,8 @@ class ResetPasswordController {
         echo "Something is wrong ! Please try again";
       }
     }
-    // Unset session variables.
+    // Destroy session..
     session_unset();
+    session_destroy();
   }
 }

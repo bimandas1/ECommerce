@@ -89,13 +89,15 @@ class RegisterController {
         echo 'You have been registered.';
       }
       else {
-        // Unset session variables.
-        session_unset();
         echo 'Unsuccessfull ! Try again.';
       }
     }
     else {
       echo "OTP didn't matched.";
     }
+
+    // Destroy session.
+    session_unset();
+    session_destroy();
   }
 }

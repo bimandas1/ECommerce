@@ -15,13 +15,13 @@
 
 <body>
   <!-- Require Navbar -->
-  <?php require_once __DIR__ . '/components/navbar.php'; ?>
+  <?php require_once __DIR__ . '/components/navbar_view.php'; ?>
   <!-- Show products -->
   <div class="product-section">
     <h2> Latest Items </h2>
     <div class="products">
       <!-- Require product rendering page component -->
-      <?php require_once __DIR__ . '/components/items.php'; ?>
+      <?php require_once __DIR__ . '/components/items_view.php'; ?>
     </div>
   </div>
 

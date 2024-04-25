@@ -10,10 +10,9 @@ $(document).on('submit', '#form-user-data-for-register', function submitUserData
   }
   // Send data through AJAX.
   else {
-    showAlertMessage("Sending OTP to your mail.");
-
     $.post('/register', $('#form-user-data-for-register').serialize(), function(data) {
       if (data == '1') {
+        showAlertMessage("Sending OTP to your mail.");
         $('#user-data-input-box').hide();
         $('#otp-input-box').show();
       }

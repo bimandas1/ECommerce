@@ -68,6 +68,15 @@
     font-size: 18px;
   }
 
+  .password-format-description {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(155, 44, 0);
+    letter-spacing: 1px;
+    line-height: 1;
+    margin: -6px 0 14px;
+  }
+
   input {
     margin: 2px 0 16px;
     width: 100%;

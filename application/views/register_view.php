@@ -12,9 +12,9 @@
 <body>
   <div class="main">
     <!-- Alert message -->
-    <?php if ($message !== null) : ?>
+    <?php if ($this->message !== null) : ?>
       <div class="alert">
-        <p class="alert-message"> <?= $message ?> </p>
+        <p class="alert-message"> <?= $this->message ?> </p>
       </div>
     <?php endif; ?>
 
@@ -31,11 +31,17 @@
 
       <form id="form-user-data-for-register">
         <input type="hidden" name="task" value="submit-user-data">
-        <input type="text" name="email" placeholder="Email Id">
-        <input type="text" name="fname" placeholder="First name">
-        <input type="text" name="lname" placeholder="Last name">
-        <input type="text" name="password" placeholder="Password">
-        <input type="text" name="reenter-password" placeholder="Reenter password">
+        <label for="email"> Email Id </label>
+        <input type="email" name="email" placeholder="Email Id" required>
+        <label for="fname"> First name </label>
+        <input type="text" name="fname" placeholder="First name" pattern="\b([A-Z][a-z. ]+[ ]*)+" required>
+        <label for="lname"> Last name </label>
+        <input type="text" name="lname" placeholder="Last name" pattern="\b([A-Z][a-z. ]+[ ]*)+" required>
+        <label for="Password"> Password </label>
+        <input type="password" name="password" placeholder="Password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$" required>
+        <p class="password-format-description"> Password must be 8-16 character long, and contain atleast 1 uppercase, lowercase, numeric and special character. </p>
+        <label for="reenter-password"> Reenter password </label>
+        <input type="password" name="reenter-password" placeholder="Reenter password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$" required>
         <input type="submit" name="submit">
       </form>
     </div>

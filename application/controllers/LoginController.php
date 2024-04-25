@@ -1,12 +1,24 @@
 <?php
 
+require_once __DIR__ . '/../../helpers/Session.php';
+
 /**
  * Control user login.
  */
 class LoginController {
 
-  private $message = null;
-  private $googleAuth = null;
+  private $message;
+  private $googleAuth;
+
+  /**
+   * Constructor function to set default values.
+   */
+  function __construct() {
+    $this->message = null;
+    // Destroy session.
+    $session = new Session();
+    $session->destroySession();
+  }
 
   /**
    * Function to control user login.
@@ -23,10 +35,14 @@ class LoginController {
       if($db->isValidUser($email, $password) === TRUE) {
         session_start();
         $_SESSION['email'] = $email;
+        if($db->isAdmin($email)) {
+          $_SESSION['is_admin'] = TRUE;
+        }
+        // Redirect to main page.
         header('location: /feeds');
       }
       else {
-        $message = 'Email id or password not matched';
+        $this->message = 'Email id or password not matched';
       }
     }
 

@@ -11,9 +11,9 @@
 <body>
   <div class="main">
     <!-- Alert message -->
-    <?php if ($message !== null) : ?>
+    <?php if ($this->message != null) : ?>
       <div class="alert">
-        <p class="alert-message"> <?= $message ?> </p>
+        <p class="alert-message"> <?= $this->message ?> </p>
       </div>
     <?php endif; ?>
 
@@ -30,8 +30,10 @@
 
       <!-- Input form -->
       <form action="/login" method="POST">
-        <input type="text" name="email" placeholder="Email Id">
-        <input type="text" name="password" placeholder="Password">
+        <label for="email"> Email </label>
+        <input type="email" name="email" placeholder="Email Id" required>
+        <label for="password"> Password </label>
+        <input type="password" name="password" placeholder="Password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$" required>
         <input type="submit" name="submit">
       </form>
 

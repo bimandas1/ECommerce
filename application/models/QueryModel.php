@@ -117,7 +117,6 @@ class QueryModel extends Database {
       $sql = $this->conn->prepare("insert into user (email, password, fname, lname) values (?, ?, ?, ?)");
       // Generate hash value of the password.
       $password_hash = password_hash($password, PASSWORD_DEFAULT);
-      echo $password;
       $sql->execute([$email, $password_hash, $fname, $lname]);
       if ($sql->rowCount() > 0) {
         return TRUE;
@@ -225,12 +224,33 @@ class QueryModel extends Database {
   }
 
   /**
-   * Fetch posts in a selected range.
+   * Check user is an admin or not.
+   *
+   * @param string $email
+   *   USer's email.
+   *
+   * @return bool
+   *   Return TRUE if user is an admin, else FALSE.
+   */
+  public function isAdmin(string $email): bool {
+    $sql = $this->conn->prepare("select is_admin from user where email = ?");
+    $sql->execute([$email]);
+    $res = $sql->fetch(PDO::FETCH_ASSOC);
+    if($res['is_admin'] == 1) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  // Query on products.
+
+  /**
+   * Fetch products in a selected range.
    *
    * @param int $lastId.
-   *  Id of the last post that were fetched previously.
+   *  Id of the last product that were fetched previously.
    * @param int $count.
-   *  No. of posts to be fetched.
+   *  No. of products to be fetched.
    *
    * @return mixed.
    *   Returns posts array or null in case no post available.
@@ -248,19 +268,45 @@ class QueryModel extends Database {
   }
 
   /**
-   * Fetch posts by search keywords.
+   * Fetch products by search keywords.
    *
    * @param string $searchKeys.
    *  Search keyword.
    *
    * @return mixed.
-   *   Returns posts array or null in case no post match with search keyword.
+   *   Returns products array or null in case no post match with search keyword.
    */
   public function fetchProductsBySearchKeys(string $searchKeys) : array {
     $sql = $this->conn->prepare("select * from product where name like '%$searchKeys%' OR description like '%$searchKeys%' order by id asc");
     $sql->execute();
     $res = $sql->fetchAll(PDO::FETCH_ASSOC);
     return $res;
+  }
+
+  /**
+   * Add new item to products.
+   *
+   * @param string $name
+   *   Name of the new product.
+   * @param string $desc
+   *  Description of the new product.
+   * @param integer $price
+   *   Price of the new product.
+   * @param string $extension
+   *   Extension of the new product.
+   *
+   * @return string
+   *   File name of the newly added product image.
+   */
+  public function addNewProduct(string $name, string $desc, int $price, string $extension): string {
+    $sql = $this->conn->prepare("insert into product (name, description, price) values (?, ?, ?)");
+    $sql->execute([$name, $desc, $price]);
+    // Add image name to the product.
+    $lastInsertId = $this->conn->lastInsertId();
+    $imageName = 'p' . $lastInsertId . '.' . $extension;
+    $sql = $this->conn->prepare("update product set photo = ? where id = ?");
+    $sql->execute([$imageName, $lastInsertId]);
+    return $imageName;
   }
 
   /**

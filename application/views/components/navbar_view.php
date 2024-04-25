@@ -12,7 +12,7 @@
         </li>
         <li class="nav-item">
           <!-- <a class="nav-link" href="#">Link</a> -->
-          <a class="nav-link" href="<?= $this->userData['is_admin'] ? 'add-new-product' : 'cart' ?>">
+          <a class="nav-link" href="<?= $this->userData['is_admin'] ? 'admin' : 'cart' ?>">
             <img class="cart_icon" src="/public//assests//images//<?= $this->userData['is_admin'] ? 'add-new-product_icon.png' : 'cart_icon.jpg' ?>" alt="cart_icon" style="width:45px">
           </a>
         </li>
